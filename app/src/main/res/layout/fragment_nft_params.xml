@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dashboard.NftParams"
+    android:background="@color/blue_700">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Owner"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edittext_owner"
+            android:background="@drawable/rounded_edittext_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="0x3532baadBD5C314BAFf991F39aE8eCE7f3F66786"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintcolor"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Count"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edittext_count"
+            android:background="@drawable/rounded_edittext_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="19000"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintcolor"
+            android:inputType="number"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edittext_name"
+            android:background="@drawable/rounded_edittext_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CryptoDo"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintcolor"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Symbol"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edittext_symbol"
+            android:background="@drawable/rounded_edittext_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CTD"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintcolor"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Founder"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edittext_founder"
+            android:background="@drawable/rounded_edittext_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="0xB437EEbF5A0E49Ccd8A5A4987810225b51C9b71F"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintcolor"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Token per transaction"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edittext_per_transaction"
+            android:background="@drawable/rounded_edittext_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="100"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintcolor"
+            android:inputType="number"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Token per wallet"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edittext_per_wallet"
+            android:background="@drawable/rounded_edittext_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="150"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintcolor"
+            android:inputType="number"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start price"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edittext_start_price"
+            android:background="@drawable/rounded_edittext_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="150"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hintcolor"
+            android:inputType="number"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"></EditText>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NEXT" />
+
+
+    </LinearLayout>
+</FrameLayout>
