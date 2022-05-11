@@ -17,10 +17,16 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.cryptodo.R;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener {
-    private ContractTypeFragment contract_type_fragment;
+    private ContractTypeFragment contract_type_fragment = new ContractTypeFragment();
 
 
     public DashboardFragment()  {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,

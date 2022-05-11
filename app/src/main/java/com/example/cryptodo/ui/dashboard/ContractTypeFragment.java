@@ -82,9 +82,9 @@ public class ContractTypeFragment extends Fragment implements View.OnClickListen
         void buttonClicked(String blockchain, String ctype);
     }
 
-    private ContractTypeFragment.ButtonPressListener buttonPressListener = null;
+    private ButtonPressListener buttonPressListener = null;
 
-    public void setButtonPressListener(ContractTypeFragment.ButtonPressListener buttonPressListener) {
+    public void setButtonPressListener(ButtonPressListener buttonPressListener) {
         this.buttonPressListener = buttonPressListener;
     }
 

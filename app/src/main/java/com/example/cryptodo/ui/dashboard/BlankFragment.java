@@ -26,9 +26,7 @@ public class BlankFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private DashboardFragment dashboard_fragment = new DashboardFragment();
-    private ContractTypeFragment contract_type_fragment = new ContractTypeFragment();
 
     public BlankFragment() {
         dashboard_fragment.setButtonPressListener(new DashboardFragment.ButtonPressListener() {
@@ -44,6 +42,7 @@ public class BlankFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override

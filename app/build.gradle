@@ -32,8 +32,8 @@ android {
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    def okHttp_version = '4.8.0'
-    implementation "com.squareup.okhttp3:okhttp:$okHttp_version"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation "com.fasterxml.jackson.core:jackson-databind:2.11.1"
 
     implementation 'androidx.appcompat:appcompat:1.4.1'

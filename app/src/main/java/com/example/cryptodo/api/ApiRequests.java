@@ -52,9 +52,11 @@ public class ApiRequests {
         this.add_user_url = url + "/user/add";
         this.user_update_url = url + "/user/update";
         this.user_ref_url = url + "/user/referral_deduction";
-        this.contract_add_nft_url = url + "/contract/addnft";
+        this.contract_add_nft_url = url + "/contract/add-nft";
         this.contract_status_url = url + "/contract/status";
     }
+
+
 
     private JSONObject postRequest(String url, JSONObject postBody) throws IOException, JSONException {
         RequestBody body = RequestBody.create(JSON, postBody.toString());
@@ -70,12 +72,12 @@ public class ApiRequests {
         return data;
     }
 
-//     public User getUser(int userId) throws JSONException, IOException {
+//     public AddUserOut getUser(int userId) throws JSONException, IOException {
 //        JSONObject jsonObj = new JSONObject();
 //        jsonObj.put("user_id", userId);
 //        JSONObject answer = postRequest(get_user_url, jsonObj);
 //        try {
-//            User user = new User();
+//            AddUserOut user = new AddUserOut();
 //            user.id = Integer.parseInt(answer.getString("id"));
 //            user.user_id = answer.getInt("user_id");
 //            user.username = answer.getString("username");
