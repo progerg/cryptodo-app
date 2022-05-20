@@ -16,12 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cryptodo.R;
 
-public class DashboardFragment extends Fragment implements View.OnClickListener {
-    private ContractTypeFragment contract_type_fragment = new ContractTypeFragment();
-
-
-    public DashboardFragment()  {
-    }
+public class DashboardFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,16 +33,59 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ImageButton bscButton = (ImageButton) getView().findViewById(R.id.bscButton);
-        bscButton.setOnClickListener(this);
-
         ImageButton ethButton = (ImageButton) getView().findViewById(R.id.ethButton);
-        ethButton.setOnClickListener(this);
-
         ImageButton polButton = (ImageButton) getView().findViewById(R.id.polButton);
-        polButton.setOnClickListener(this);
-
         ImageButton tronButton = (ImageButton) getView().findViewById(R.id.tronButton);
-        tronButton.setOnClickListener(this);
+
+        tronButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "tron", Toast.LENGTH_LONG).show();
+                getChildFragmentManager().beginTransaction().replace(R.id.fragment_dashboard, new ContractTypeFragment())
+                        .setReorderingAllowed(true).commit();
+                tronButton.setEnabled(false);
+                polButton.setEnabled(false);
+                ethButton.setEnabled(false);
+                bscButton.setEnabled(false);
+
+            }
+        });
+
+        polButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "pol", Toast.LENGTH_LONG).show();
+                getChildFragmentManager().beginTransaction().replace(R.id.fragment_dashboard, new ContractTypeFragment())
+                        .setReorderingAllowed(true).commit();
+                tronButton.setEnabled(false);
+                polButton.setEnabled(false);
+                ethButton.setEnabled(false);
+                bscButton.setEnabled(false);
+
+            }
+        });
+
+        ethButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "eth", Toast.LENGTH_LONG).show();
+                getChildFragmentManager().beginTransaction().replace(R.id.fragment_dashboard, new ContractTypeFragment())
+                        .setReorderingAllowed(true).commit();
+                tronButton.setEnabled(false);
+                polButton.setEnabled(false);
+                ethButton.setEnabled(false);
+                bscButton.setEnabled(false);
+            }
+        });
+
+        bscButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "bsc", Toast.LENGTH_LONG).show();
+                getChildFragmentManager().beginTransaction().replace(R.id.fragment_dashboard, new ContractTypeFragment())
+                        .setReorderingAllowed(true).commit();
+                tronButton.setEnabled(false);
+                polButton.setEnabled(false);
+                ethButton.setEnabled(false);
+                bscButton.setEnabled(false);
+            }
+        });
 
     }
 
@@ -56,42 +94,4 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         super.onDestroyView();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.polButton:
-                Toast.makeText(getActivity(), "pol", Toast.LENGTH_LONG).show();
-                onButtonPress("pol");
-                break;
-            case R.id.tronButton:
-                Toast.makeText(getActivity(), "tron", Toast.LENGTH_LONG).show();
-                onButtonPress("tron");
-                break;
-            case R.id.ethButton:
-                Toast.makeText(getActivity(), "eth", Toast.LENGTH_LONG).show();
-                onButtonPress("eth");
-                break;
-            case R.id.bscButton:
-                Toast.makeText(getActivity(), "bsc", Toast.LENGTH_LONG).show();
-                onButtonPress("bsc");
-                break;
-
-        }
-    }
-
-    public interface ButtonPressListener {
-        void buttonClicked(String blockchain);
-    }
-
-    private ButtonPressListener buttonPressListener = null;
-
-    public void setButtonPressListener(ButtonPressListener buttonPressListener) {
-        this.buttonPressListener = buttonPressListener;
-    }
-
-    protected void onButtonPress(String blockchain) {
-        if (buttonPressListener != null) {
-            buttonPressListener.buttonClicked(blockchain);
-        }
-    }
 }

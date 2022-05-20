@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_nft_params"
+    android:id="@+id/fragment_nft_params2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.NftParams"
+    tools:context=".ui.dashboard.NftParams2"
     android:background="@color/blue_700">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,32 +18,15 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Owner wallet address"
+            android:text="Token per transaction"
             android:textColor="@color/white"/>
 
         <EditText
-            android:id="@+id/edittext_owner"
+            android:id="@+id/edittext_per_transaction"
             android:background="@drawable/rounded_edittext_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint=""
-            android:textColor="@color/white"
-            android:textColorHint="@color/hintcolor"
-            android:layout_marginBottom="15dp"
-            android:padding="8dp"></EditText>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Count"
-            android:textColor="@color/white"/>
-
-        <EditText
-            android:id="@+id/edittext_count"
-            android:background="@drawable/rounded_edittext_background"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Example: 19000"
+            android:hint="Example: 100"
             android:textColor="@color/white"
             android:textColorHint="@color/hintcolor"
             android:inputType="number"
@@ -54,15 +36,51 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="Token per wallet"
             android:textColor="@color/white"/>
 
         <EditText
-            android:id="@+id/edittext_name"
+            android:id="@+id/edittext_per_wallet"
             android:background="@drawable/rounded_edittext_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Example: CryptoDo"
+            android:hint="Example: 150"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hintcolor"
+            android:inputType="number"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start price"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edittext_start_price"
+            android:background="@drawable/rounded_edittext_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Example: 150"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hintcolor"
+            android:inputType="number"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time for grown"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edittext_time_for_grown"
+            android:background="@drawable/rounded_edittext_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Example: 2 days"
             android:textColor="@color/white"
             android:textColorHint="@color/hintcolor"
             android:layout_marginBottom="15dp"
@@ -71,42 +89,46 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Symbol"
+            android:text="Url of contract"
             android:textColor="@color/white"/>
 
         <EditText
-            android:id="@+id/edittext_symbol"
+            android:id="@+id/edittext_url"
             android:background="@drawable/rounded_edittext_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Example: CTD"
+            android:hint="Example: https://google.com"
             android:textColor="@color/white"
             android:textColorHint="@color/hintcolor"
             android:layout_marginBottom="15dp"
             android:padding="8dp"></EditText>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Founder wallet address"
-            android:textColor="@color/white"/>
+            android:layout_height="wrap_content" >
 
-        <EditText
-            android:id="@+id/edittext_founder"
-            android:background="@drawable/rounded_edittext_background"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:textColor="@color/white"
-            android:textColorHint="@color/hintcolor"
-            android:layout_marginBottom="15dp"
-            android:padding="8dp"></EditText>
+            <Switch
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/white"
+                android:text="Fixed token count" />
+
+            <Switch
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Presale function" />
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/create_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NEXT" />
+            android:text="Create" />
 
 
     </LinearLayout>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_nft_params"
+    android:id="@+id/fragment_simple_params"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.NftParams"
+    tools:context=".ui.dashboard.SimpleParams"
     android:background="@color/blue_700">
 
 
@@ -88,7 +88,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Founder wallet address"
+            android:text="Decimals"
             android:textColor="@color/white"/>
 
         <EditText
@@ -96,11 +96,44 @@
             android:background="@drawable/rounded_edittext_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint=""
+            android:hint="Example: 5"
             android:textColor="@color/white"
             android:textColorHint="@color/hintcolor"
+            android:inputType="number"
             android:layout_marginBottom="15dp"
             android:padding="8dp"></EditText>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Switch
+                android:id="@+id/burn_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+
+                android:textColor="@color/white"
+                android:text="Burn" />
+
+            <Switch
+                android:id="@+id/mint_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginRight="20dp"
+                android:text="Mint" />
+
+            <Switch
+                android:id="@+id/safemoon_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Fork Safemoon" />
+
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/button"
