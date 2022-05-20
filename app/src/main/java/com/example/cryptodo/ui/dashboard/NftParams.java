@@ -9,16 +9,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cryptodo.R;
+import com.example.cryptodo.db.DB;
 
 
 public class NftParams extends Fragment {
+    DB mDBConnector;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mDBConnector = new DB(getActivity());
+
     }
 
     @Override
@@ -29,6 +35,24 @@ public class NftParams extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "next", Toast.LENGTH_LONG).show();
+
+                EditText ownerEdit = (EditText) getView().findViewById(R.id.edittext_owner);
+                String owner = ownerEdit.getText().toString();
+
+                EditText countEdit = (EditText) getView().findViewById(R.id.edittext_count);
+                String count = countEdit.getText().toString();
+
+                EditText nameEdit = (EditText) getView().findViewById(R.id.edittext_name);
+                String name = nameEdit.getText().toString();
+
+                EditText symbolEdit = (EditText) getView().findViewById(R.id.edittext_symbol);
+                String symbol = symbolEdit.getText().toString();
+
+                EditText founderEdit = (EditText) getView().findViewById(R.id.edittext_founder);
+                String founder = founderEdit.getText().toString();
+
+                mDBConnector.firstInsertNft(owner, Long.parseLong(count), name, symbol, founder);
+
                 getChildFragmentManager().beginTransaction().replace(R.id.fragment_nft_params, new NftParams2())
                         .setReorderingAllowed(true).commit();
                 button.setEnabled(false);

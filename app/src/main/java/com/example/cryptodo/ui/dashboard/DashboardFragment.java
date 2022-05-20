@@ -15,12 +15,19 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cryptodo.R;
+import com.example.cryptodo.db.DB;
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements View.OnClickListener {
+    DB mDBConnector;
 
+    private ImageButton bscButton;
+    private ImageButton ethButton;
+    private ImageButton polButton;
+    private ImageButton tronButton;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDBConnector = new DB(getActivity());
 
     }
 
@@ -32,60 +39,18 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ImageButton bscButton = (ImageButton) getView().findViewById(R.id.bscButton);
-        ImageButton ethButton = (ImageButton) getView().findViewById(R.id.ethButton);
-        ImageButton polButton = (ImageButton) getView().findViewById(R.id.polButton);
-        ImageButton tronButton = (ImageButton) getView().findViewById(R.id.tronButton);
+        bscButton = (ImageButton) getView().findViewById(R.id.bscButton);
+        bscButton.setOnClickListener(this);
 
-        tronButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "tron", Toast.LENGTH_LONG).show();
-                getChildFragmentManager().beginTransaction().replace(R.id.fragment_dashboard, new ContractTypeFragment())
-                        .setReorderingAllowed(true).commit();
-                tronButton.setEnabled(false);
-                polButton.setEnabled(false);
-                ethButton.setEnabled(false);
-                bscButton.setEnabled(false);
+        ethButton = (ImageButton) getView().findViewById(R.id.ethButton);
+        ethButton.setOnClickListener(this);
 
-            }
-        });
+        polButton = (ImageButton) getView().findViewById(R.id.polButton);
+        polButton.setOnClickListener(this);
 
-        polButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "pol", Toast.LENGTH_LONG).show();
-                getChildFragmentManager().beginTransaction().replace(R.id.fragment_dashboard, new ContractTypeFragment())
-                        .setReorderingAllowed(true).commit();
-                tronButton.setEnabled(false);
-                polButton.setEnabled(false);
-                ethButton.setEnabled(false);
-                bscButton.setEnabled(false);
+        tronButton = (ImageButton) getView().findViewById(R.id.tronButton);
+        tronButton.setOnClickListener(this);
 
-            }
-        });
-
-        ethButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "eth", Toast.LENGTH_LONG).show();
-                getChildFragmentManager().beginTransaction().replace(R.id.fragment_dashboard, new ContractTypeFragment())
-                        .setReorderingAllowed(true).commit();
-                tronButton.setEnabled(false);
-                polButton.setEnabled(false);
-                ethButton.setEnabled(false);
-                bscButton.setEnabled(false);
-            }
-        });
-
-        bscButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "bsc", Toast.LENGTH_LONG).show();
-                getChildFragmentManager().beginTransaction().replace(R.id.fragment_dashboard, new ContractTypeFragment())
-                        .setReorderingAllowed(true).commit();
-                tronButton.setEnabled(false);
-                polButton.setEnabled(false);
-                ethButton.setEnabled(false);
-                bscButton.setEnabled(false);
-            }
-        });
 
     }
 
@@ -94,4 +59,32 @@ public class DashboardFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @Override
+    public void onClick(View v) {
+        String blockchain;
+        switch (v.getId()){
+            case R.id.polButton:
+                blockchain = "pol";
+                break;
+            case R.id.tronButton:
+                Toast.makeText(getActivity(), "In development", Toast.LENGTH_LONG).show();
+                return;
+            case R.id.ethButton:
+                blockchain = "eth";
+                break;
+            case R.id.bscButton:
+                blockchain = "bsc";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + v.getId());
+        }
+        mDBConnector.insertNewCurrent(blockchain);
+        getChildFragmentManager().beginTransaction().replace(R.id.fragment_dashboard, new ContractTypeFragment())
+                .setReorderingAllowed(true).addToBackStack(null).commit();
+        tronButton.setEnabled(false);
+        polButton.setEnabled(false);
+        ethButton.setEnabled(false);
+        bscButton.setEnabled(false);
+
+    }
 }

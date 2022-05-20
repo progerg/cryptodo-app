@@ -36,7 +36,6 @@ public class SimpleParams extends Fragment {
         Switch mintSwitch = (Switch) getView().findViewById(R.id.mint_switch);
         Switch safemoonSwitch = (Switch) getView().findViewById(R.id.safemoon_switch);
 
-
         burnSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
