@@ -67,7 +67,6 @@ public class DB {
     public DB(Context context) {
         OpenHelper mOpenHelper = new OpenHelper(context);
         mDataBase = mOpenHelper.getWritableDatabase();
-        System.out.println(Environment.getDataDirectory());
     }
 
     public void updateValue(String tableName, String column, int value, int id) {
@@ -116,7 +115,6 @@ public class DB {
 
     private int getMaxId() {
         String get_str = "SELECT MAX(id) AS id FROM " + TABLE_NAME_2;
-        mDataBase.execSQL(get_str);
         Cursor mCursor = mDataBase.rawQuery(get_str, null);
         mCursor.moveToFirst();
         int id = mCursor.getInt(0);

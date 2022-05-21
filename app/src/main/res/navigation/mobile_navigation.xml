@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.cryptodo.ui.dashboard.BlankFragment"
+        android:name="com.example.cryptodo.ui.dashboard.DashboardAreaFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_blank" >
+        tools:layout="@layout/fragment_dashboard_area" >
     </fragment>
 
     <fragment

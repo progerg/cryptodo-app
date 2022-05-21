@@ -2,6 +2,8 @@ package com.example.cryptodo;
 
 import android.os.Bundle;
 
+import com.example.cryptodo.ui.dashboard.ContractTypeFragment;
+import com.example.cryptodo.ui.dashboard.DashboardFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.dashboard_area, new DashboardFragment())
+                .setReorderingAllowed(true).addToBackStack(null).commit();
+
     }
 
 }

@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import com.example.cryptodo.R;
 
 
-public class BlankFragment extends Fragment {
+public class DashboardAreaFragment extends Fragment {
 
     private DashboardFragment dashboard_fragment = new DashboardFragment();
 
-    public BlankFragment() {
+    public DashboardAreaFragment() {
 
     }
 
@@ -30,7 +30,7 @@ public class BlankFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false);
+        return inflater.inflate(R.layout.fragment_dashboard_area, container, false);
     }
 
     @Override
