@@ -92,7 +92,7 @@
             android:textColor="@color/white"/>
 
         <EditText
-            android:id="@+id/edittext_founder"
+            android:id="@+id/edittext_decimals"
             android:background="@drawable/rounded_edittext_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -134,12 +134,18 @@
 
         </LinearLayout>
 
-
-        <Button
-            android:id="@+id/button"
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NEXT" />
+            android:textColor="#00C3FD"
+            android:textSize="24sp" />
+        <Button
+            android:id="@+id/create_button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CREATE"
+            android:layout_marginTop="20dp"/>
 
 
     </LinearLayout>

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cryptodo.R;
@@ -17,7 +18,7 @@ import com.example.cryptodo.db.DB;
 
 
 public class NftParams extends Fragment {
-    DB mDBConnector;
+    private DB mDBConnector;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,10 +35,17 @@ public class NftParams extends Fragment {
         Button button = (Button) getView().findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                TextView textView = getView().findViewById(R.id.textView);
+
                 Toast.makeText(getActivity(), "next", Toast.LENGTH_LONG).show();
 
                 EditText ownerEdit = (EditText) getView().findViewById(R.id.edittext_owner);
                 String owner = ownerEdit.getText().toString();
+
+                if (owner.length() != 42 || owner.substring(0, 2) != "0x") {
+                    textView.setText("Wrong owner wallet address");
+                    return;
+                }
 
                 EditText countEdit = (EditText) getView().findViewById(R.id.edittext_count);
                 String count = countEdit.getText().toString();
@@ -50,6 +58,16 @@ public class NftParams extends Fragment {
 
                 EditText founderEdit = (EditText) getView().findViewById(R.id.edittext_founder);
                 String founder = founderEdit.getText().toString();
+
+                if (founder.length() != 42 || founder.substring(0, 2) != "0x") {
+                    textView.setText("Wrong founder wallet address");
+                    return;
+                }
+
+                if (!(!name.isEmpty() && !count.isEmpty() && !symbol.isEmpty() && !founder.isEmpty())) {
+                    textView.setText("Please fill in all the fields");
+                    return;
+                }
 
                 mDBConnector.firstInsertNft(owner, Long.parseLong(count), name, symbol, founder);
 

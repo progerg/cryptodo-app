@@ -93,7 +93,23 @@ public class DB {
         cv.put(COLUMN_OWNER, wallet);
         cv.put(COLUMN_FOUNDER, founderWallet);
         cv.put(COLUMN_TOTAL_SUPPLY, count);
+        cv.put(COLUMN_BLOCKCHAIN, selectCurrent().blockchain);
         return mDataBase.insert(TABLE_NAME_2, null, cv);
+    }
+
+    public long insertSimple(String wallet, long count, String name, String symbol,
+                             int decimals, boolean burn, boolean mint, boolean safemoon) {
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_NAME, name);
+        cv.put(COLUMN_SYMBOL, symbol);
+        cv.put(COLUMN_OWNER, wallet);
+        cv.put(COLUMN_DECIMALS, decimals);
+        cv.put(COLUMN_TOTAL_SUPPLY, count);
+        cv.put(COLUMN_BURN, burn);
+        cv.put(COLUMN_MINT, mint);
+        cv.put(COLUMN_SAFEMOON, safemoon);
+        cv.put(COLUMN_BLOCKCHAIN, selectCurrent().blockchain);
+        return mDataBase.insert(TABLE_NAME, null, cv);
     }
 
     private int getMaxId() {

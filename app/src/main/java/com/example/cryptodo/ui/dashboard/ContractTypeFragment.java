@@ -19,8 +19,6 @@ public class ContractTypeFragment extends Fragment implements View.OnClickListen
 
     DB mDBConnector;
 
-    private NftParams nftparams = new NftParams();
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,16 +49,19 @@ public class ContractTypeFragment extends Fragment implements View.OnClickListen
         switch (v.getId()){
             case R.id.erc20:
                 type = "erc20";
+                getChildFragmentManager().beginTransaction().replace(R.id.fragment_ctype, new SimpleParams())
+                        .setReorderingAllowed(true).addToBackStack(null).commit();
+                break;
             case R.id.erc721:
                 type = "erc721";
+                getChildFragmentManager().beginTransaction().replace(R.id.fragment_ctype, new NftParams())
+                        .setReorderingAllowed(true).addToBackStack(null).commit();
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
 
         mDBConnector.addTypeToCurrent(type);
-        getChildFragmentManager().beginTransaction().replace(R.id.fragment_ctype, nftparams)
-                .setReorderingAllowed(true).addToBackStack(null).commit();
         erc721.setEnabled(false);
         erc20.setEnabled(false);
     }

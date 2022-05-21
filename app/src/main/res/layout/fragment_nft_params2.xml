@@ -65,7 +65,7 @@
             android:hint="Example: 150"
             android:textColor="@color/white"
             android:textColorHint="@color/hintcolor"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:layout_marginBottom="15dp"
             android:padding="8dp"></EditText>
 
@@ -84,6 +84,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/hintcolor"
             android:layout_marginBottom="15dp"
+            android:text="2 days"
             android:padding="8dp"></EditText>
 
         <TextView
@@ -101,6 +102,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/hintcolor"
             android:layout_marginBottom="15dp"
+            android:text="https://google.com"
             android:padding="8dp"></EditText>
 
         <LinearLayout
@@ -108,7 +110,7 @@
             android:layout_height="wrap_content" >
 
             <Switch
-                android:id="@+id/button1"
+                android:id="@+id/fixed_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -116,14 +118,19 @@
                 android:text="Fixed token count" />
 
             <Switch
-                android:id="@+id/button2"
+                android:id="@+id/presale_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:text="Presale function" />
 
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#00C3FD"
+            android:textSize="24sp" />
         <Button
             android:id="@+id/create_button"
             android:layout_width="match_parent"
