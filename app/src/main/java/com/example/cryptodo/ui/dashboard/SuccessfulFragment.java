@@ -22,16 +22,21 @@ public class SuccessfulFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         profileButton = (Button) getView().findViewById(R.id.go_to_profile_button);
         profileButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                getChildFragmentManager().beginTransaction().replace(R.id.fragment_successful, new HomeFragment())
+                getChildFragmentManager().beginTransaction().replace(R.id.fragment_successful, new DashboardFragment())
                         .setReorderingAllowed(true).commit();
 
             }
         });
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override

@@ -46,7 +46,7 @@ public class SimpleParams extends Fragment {
                 EditText ownerEdit = (EditText) getView().findViewById(R.id.edittext_owner);
                 String owner = ownerEdit.getText().toString();
 
-                if (owner.length() != 42 || owner.substring(0, 2) != "0x") {
+                if (!(owner.length() == 42 && owner.startsWith("0x"))) {
                     textView.setText("Wrong owner wallet address");
                     return;
                 }

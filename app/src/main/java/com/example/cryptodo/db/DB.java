@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 
 
 class CurrentState {
@@ -66,6 +67,7 @@ public class DB {
     public DB(Context context) {
         OpenHelper mOpenHelper = new OpenHelper(context);
         mDataBase = mOpenHelper.getWritableDatabase();
+        System.out.println(Environment.getDataDirectory());
     }
 
     public void updateValue(String tableName, String column, int value, int id) {
@@ -147,7 +149,7 @@ public class DB {
     }
 
     public CurrentState selectCurrent() {
-        Cursor mCursor = mDataBase.query(TABLE_NAME, null, null, null, null, null, null);
+        Cursor mCursor = mDataBase.query(TABLE_NAME_3, null, null, null, null, null, null);
         mCursor.moveToFirst();
         String blockchain = mCursor.getString(0);
         String type = mCursor.getString(1);

@@ -51,7 +51,7 @@
             android:id="@+id/go_to_profile_button"
             android:layout_width="258dp"
             android:layout_height="wrap_content"
-            android:text="Go to my profile"
+            android:text="Go Back"
             android:layout_gravity="center"/>
 
 

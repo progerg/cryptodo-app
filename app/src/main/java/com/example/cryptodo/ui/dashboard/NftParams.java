@@ -42,7 +42,7 @@ public class NftParams extends Fragment {
                 EditText ownerEdit = (EditText) getView().findViewById(R.id.edittext_owner);
                 String owner = ownerEdit.getText().toString();
 
-                if (owner.length() != 42 || owner.substring(0, 2) != "0x") {
+                if (!(owner.length() == 42 && owner.startsWith("0x"))) {
                     textView.setText("Wrong owner wallet address");
                     return;
                 }
@@ -59,7 +59,7 @@ public class NftParams extends Fragment {
                 EditText founderEdit = (EditText) getView().findViewById(R.id.edittext_founder);
                 String founder = founderEdit.getText().toString();
 
-                if (founder.length() != 42 || founder.substring(0, 2) != "0x") {
+                if (!(founder.length() == 42 && founder.startsWith("0x"))) {
                     textView.setText("Wrong founder wallet address");
                     return;
                 }

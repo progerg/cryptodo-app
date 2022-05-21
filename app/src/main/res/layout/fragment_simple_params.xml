@@ -31,7 +31,8 @@
             android:textColor="@color/white"
             android:textColorHint="@color/hintcolor"
             android:layout_marginBottom="15dp"
-            android:padding="8dp"></EditText>
+            android:padding="8dp"
+            android:digits="@string/letters_with_number"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -66,7 +67,8 @@
             android:textColor="@color/white"
             android:textColorHint="@color/hintcolor"
             android:layout_marginBottom="15dp"
-            android:padding="8dp"></EditText>
+            android:padding="8dp"
+            android:digits="@string/english_letters"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -83,7 +85,8 @@
             android:textColor="@color/white"
             android:textColorHint="@color/hintcolor"
             android:layout_marginBottom="15dp"
-            android:padding="8dp"></EditText>
+            android:padding="8dp"
+            android:digits="@string/upper_letters"></EditText>
 
         <TextView
             android:layout_width="match_parent"
