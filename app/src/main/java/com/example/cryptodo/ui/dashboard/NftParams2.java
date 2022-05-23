@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import com.example.cryptodo.R;
 import com.example.cryptodo.api.ContractService;
+import com.example.cryptodo.api.ThreadAddContract;
 import com.example.cryptodo.api.in_models.AddNft;
+import com.example.cryptodo.api.in_models.AddUser;
 import com.example.cryptodo.api.out_models.ContractAddOut;
 import com.example.cryptodo.db.DB;
 
@@ -69,24 +71,16 @@ public class NftParams2 extends Fragment {
                 boolean presale = presaleSwitch.isChecked();
 
                 mDBConnector.updateNft(Integer.parseInt(perTx), Integer.parseInt(perWallet), Float.parseFloat(startPrice), timeForGrown, url, fixedToken, presale);
-                sendPost();
+
+                AddNft contract = mDBConnector.getNftContract();
+                AddUser user = mDBConnector.getUser();
+
+                ThreadAddContract threadAddContract = new ThreadAddContract(user.userId, contract, mDBConnector);
                 getChildFragmentManager().beginTransaction().replace(R.id.fragment_nft_params2, new SuccessfulFragment())
                         .setReorderingAllowed(true).commit();
                 button.setEnabled(false);
             }
         });
-    }
-
-    public void sendPost() {
-        String baseUrl = "https://api.cryptodo.app/api/contract";
-
-        AddNft contract = mDBConnector.getNftContract();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ContractService service = retrofit.create(ContractService.class);
-
     }
 
     @Override

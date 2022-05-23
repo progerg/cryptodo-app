@@ -1,5 +1,7 @@
 package com.example.cryptodo.api.in_models;
 
+import java.lang.reflect.Field;
+
 public class AddSimple {
     public String owner;
     public long totalSupply;
@@ -31,5 +33,20 @@ public class AddSimple {
         this.burn = burn;
         this.mint = mint;
         this.fork_safemoon = forkSafemoon;
+    }
+
+    public boolean isEmpty()  {
+
+        for (Field field : this.getClass().getDeclaredFields()) {
+            try {
+                field.setAccessible(true);
+                if (field.get(this)!=null) {
+                    return false;
+                }
+            } catch (Exception e) {
+                System.out.println("Exception occured in processing");
+            }
+        }
+        return true;
     }
 }

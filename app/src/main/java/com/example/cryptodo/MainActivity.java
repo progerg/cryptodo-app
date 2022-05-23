@@ -2,6 +2,7 @@ package com.example.cryptodo;
 
 import android.os.Bundle;
 
+import com.example.cryptodo.api.ApiRequests;
 import com.example.cryptodo.api.UserService;
 import com.example.cryptodo.api.in_models.AddUser;
 import com.example.cryptodo.api.out_models.AddUserOut;
@@ -31,14 +32,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    private DB mDBConnector;
     private ActivityMainBinding binding;
-
-    private String baseUrl = "https://api.cryptodo.app/api/";
+    DB mDBConnector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mDBConnector = new DB(this);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -56,32 +57,16 @@ public class MainActivity extends AppCompatActivity {
         checkUser();
     }
 
-    private AddUserOut registerUser(String id) {
-        AddUserOut userOut;
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        UserService service = retrofit.create(UserService.class);
-        Call<AddUserOut> call = service.addMobile(new AddUser(id));
-        try {
-            Response<AddUserOut> userResponse = call.execute();
-            userOut = userResponse.body();
-        } catch (IOException e) {
-            e.printStackTrace();
-            userOut = new AddUserOut();
-        }
-        return userOut;
-    }
 
     public void checkUser() {
-        mDBConnector = new DB(this);
         AddUser user = mDBConnector.getUser();
         if (user.userId.isEmpty()) {
-            registerUser(mDBConnector.generateId());
+            ApiRequests apiReq = new ApiRequests();
+            apiReq.registerUser(mDBConnector.generateId(), mDBConnector);
         }
 
     }
+
 
     public Fragment getVisibleFragment(){
         FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();

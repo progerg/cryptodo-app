@@ -203,17 +203,15 @@ public class DB {
         return generatedString;
     }
 
-    public String insertUser() {
-        String generatedId = generateId();
+    public void insertUser(String generatedId) {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_USER_ID, generatedId);
         mDataBase.insert(TABLE_NAME_4, null, cv);
-        return generatedId;
     }
 
     public AddUser getUser() {
-        String get_str = "SELECT id FROM " + TABLE_NAME_4;
-        Cursor mCursor = mDataBase.rawQuery(get_str, null);
+        Cursor mCursor = mDataBase.query(TABLE_NAME_4, null, null, null, null, null, null);
+
         mCursor.moveToFirst();
         String id;
         try {
@@ -338,6 +336,7 @@ public class DB {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_2);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_3);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_4);
         onCreate(db);
     }
 

@@ -15,7 +15,18 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cryptodo.R;
+import com.example.cryptodo.api.UserService;
+import com.example.cryptodo.api.in_models.AddUser;
+import com.example.cryptodo.api.out_models.AddUserOut;
 import com.example.cryptodo.db.DB;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener {
     DB mDBConnector;
@@ -24,10 +35,12 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     private ImageButton ethButton;
     private ImageButton polButton;
     private ImageButton tronButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDBConnector = new DB(getActivity());
+
 
     }
 

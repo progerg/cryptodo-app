@@ -1,5 +1,7 @@
 package com.example.cryptodo.api.in_models;
 
+import java.lang.reflect.Field;
+
 public class AddNft {
     public String owner;
     public long totalSupply;
@@ -37,6 +39,21 @@ public class AddNft {
         this.node = node;
         this.test_mode = true;
 
+    }
+
+    public boolean isEmpty()  {
+
+        for (Field field : this.getClass().getDeclaredFields()) {
+            try {
+                field.setAccessible(true);
+                if (field.get(this)!=null) {
+                    return false;
+                }
+            } catch (Exception e) {
+                System.out.println("Exception occured in processing");
+            }
+        }
+        return true;
     }
 
 }
