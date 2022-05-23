@@ -9,10 +9,10 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface UserService {
-    @GET("/login")
-    Call<AddUserOut> login(@Body AddUser user);
+    @POST("/user/login-mobile")
+    Call<AddUserOut> loginMobile(@Body AddUser user);
 
-    @POST("/add-mobile")
+    @POST("/user/add-mobile")
     Call<AddUserOut> addMobile(@Body AddUser user);
 
 }

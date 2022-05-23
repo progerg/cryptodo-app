@@ -1,5 +1,9 @@
 package com.example.cryptodo.api.in_models;
 
 public class AddUser {
-    public int userId;
+    public String userId;
+
+    public AddUser(String id) {
+        this.userId = id;
+    }
 }
