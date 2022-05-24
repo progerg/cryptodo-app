@@ -71,6 +71,7 @@ public class NftParams2 extends Fragment {
                 User user = mDBConnector.getUser();
 
                 ThreadAddContract threadAddContract = new ThreadAddContract(user.userId, contract, mDBConnector);
+                threadAddContract.run();
                 getChildFragmentManager().beginTransaction().replace(R.id.fragment_nft_params2, new SuccessfulFragment())
                         .setReorderingAllowed(true).commit();
                 button.setEnabled(false);

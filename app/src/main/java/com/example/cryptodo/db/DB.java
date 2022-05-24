@@ -149,6 +149,7 @@ public class DB {
     public SimpleContract getSimpleContract() {
         Cursor mCursor = mDataBase.query(TABLE_NAME, null, COLUMN_ID + " = ?", new String[]{String.valueOf(getMaxIdSimple())}, null, null, null);
         mCursor.moveToFirst();
+        System.out.println(mCursor.getString(1));
         boolean burn = mCursor.getInt(1) == 1;
         boolean mint = mCursor.getInt(2) == 1;
         boolean safemoon = mCursor.getInt(3) == 1;
@@ -322,14 +323,14 @@ public class DB {
                     COLUMN_SAFEMOON + " BOOLEAN DEFAULT 0," +
                     COLUMN_TEST_MODE + " BOOLEAN DEFAULT 1," +
                     COLUMN_BLOCKCHAIN + " TEXT DEFAULT \"bsc\"," +
-                    COLUMN_OWNER + "TEXT," +
-                    COLUMN_SYMBOL + "TEXT," +
-                    COLUMN_TOTAL_SUPPLY + "INTEGER," +
-                    COLUMN_NAME + "TEXT," +
-                    COLUMN_DECIMALS + "INTEGER," +
-                    COLUMN_CHECK_CODE + "TEXT," +
-                    COLUMN_CONTRACT_URL + "INTEGER," +
-                    COLUMN_STATUS + "TEXT DEFAULT \"not completed\");";
+                    COLUMN_OWNER + " TEXT," +
+                    COLUMN_SYMBOL + " TEXT," +
+                    COLUMN_TOTAL_SUPPLY + " INTEGER," +
+                    COLUMN_NAME + " TEXT," +
+                    COLUMN_DECIMALS + " INTEGER," +
+                    COLUMN_CHECK_CODE + " TEXT," +
+                    COLUMN_CONTRACT_URL + " INTEGER," +
+                    COLUMN_STATUS + " TEXT DEFAULT \"not completed\");";
 
             db.execSQL(query);
 
@@ -345,12 +346,12 @@ public class DB {
                     COLUMN_INCREMENT_MAX_AMOUNT + " BOOLEAN," +
                     COLUMN_PRESALE + " BOOLEAN," +
                     COLUMN_TIME_FOR_GROWN + " TEXT," +
-                    COLUMN_OWNER + "TEXT," +
-                    COLUMN_SYMBOL + "TEXT," +
-                    COLUMN_NAME + "TEXT," +
-                    COLUMN_TOTAL_SUPPLY + "INTEGER," +
-                    COLUMN_CONTRACT_URL + "INTEGER," +
-                    COLUMN_STATUS + "TEXT DEFAULT \"not completed\");";
+                    COLUMN_OWNER + " TEXT," +
+                    COLUMN_SYMBOL + " TEXT," +
+                    COLUMN_NAME + " TEXT," +
+                    COLUMN_TOTAL_SUPPLY + " INTEGER," +
+                    COLUMN_CONTRACT_URL + " INTEGER," +
+                    COLUMN_STATUS + " TEXT DEFAULT \"not completed\");";
             db.execSQL(query);
 
             query = "CREATE TABLE " + TABLE_NAME_3 + " (" +

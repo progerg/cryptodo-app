@@ -18,13 +18,11 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
     private DB mDBConnector;
 
-    public HomeFragment() {
-        mDBConnector = new DB(getActivity());
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mDBConnector = new DB(getActivity());
 
         ListView listView = getActivity().findViewById(R.id.list_view_profile);
 
@@ -33,8 +31,10 @@ public class HomeFragment extends Fragment {
 
         contracts1.addAll(contracts2);
 
-        ContractListAdapter adapter = new ContractListAdapter(getActivity(), contracts1);
-        listView.setAdapter(adapter);
+        if (!contracts1.isEmpty()) {
+            ContractListAdapter adapter = new ContractListAdapter(getActivity(), contracts1);
+            listView.setAdapter(adapter);
+        }
     }
 
     @Override

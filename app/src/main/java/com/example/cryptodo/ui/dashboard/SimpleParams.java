@@ -14,6 +14,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.cryptodo.R;
+import com.example.cryptodo.api.ThreadAddContract;
+import com.example.cryptodo.api.in_models.NFTContract;
+import com.example.cryptodo.api.in_models.SimpleContract;
+import com.example.cryptodo.api.in_models.User;
 import com.example.cryptodo.db.DB;
 
 public class SimpleParams extends Fragment {
@@ -79,6 +83,12 @@ public class SimpleParams extends Fragment {
 
                 mDBConnector.insertSimple(owner, Long.parseLong(count), name, symbol,
                         Integer.parseInt(decimals), burn, mint, safemoon);
+
+                SimpleContract contract = mDBConnector.getSimpleContract();
+                User user = mDBConnector.getUser();
+
+                ThreadAddContract threadAddContract = new ThreadAddContract(user.userId, contract, mDBConnector);
+                threadAddContract.start();
 
                 getChildFragmentManager().beginTransaction().replace(R.id.fragment_simple_params, new SuccessfulFragment())
                         .setReorderingAllowed(true).commit();
