@@ -1,13 +1,11 @@
 package com.example.cryptodo.api;
 
-import android.os.AsyncTask;
-
-import com.example.cryptodo.api.in_models.AddNft;
-import com.example.cryptodo.api.in_models.AddSimple;
-import com.example.cryptodo.api.in_models.AddUser;
+import com.example.cryptodo.api.in_models.NFTContract;
+import com.example.cryptodo.api.in_models.SimpleContract;
+import com.example.cryptodo.api.in_models.User;
 import com.example.cryptodo.api.in_models.ContractStatus;
-import com.example.cryptodo.api.out_models.AddUserOut;
-import com.example.cryptodo.api.out_models.ContractAddOut;
+import com.example.cryptodo.api.out_models.UserOut;
+import com.example.cryptodo.api.out_models.ContractOut;
 import com.example.cryptodo.api.out_models.ContractStatusOut;
 import com.example.cryptodo.db.DB;
 
@@ -21,18 +19,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ThreadAddContract extends Thread {
     private String id;
-    private String type;
-    private AddSimple contract;
-    private AddNft contractNFT;
+    private SimpleContract contract;
+    private NFTContract contractNFT;
     private DB mDBConnector;
+    String contractType;
 
-    public ThreadAddContract(String id, AddSimple contract, DB mDBConnector) {
+    public ThreadAddContract(String id, SimpleContract contract, DB mDBConnector) {
         this.id = id;
         this.contract = contract;
         this.mDBConnector = mDBConnector;
     }
 
-    public ThreadAddContract(String id, AddNft contract, DB mDBConnector) {
+    public ThreadAddContract(String id, NFTContract contract, DB mDBConnector) {
         this.id = id;
         this.contractNFT = contract;
         this.mDBConnector = mDBConnector;
@@ -41,14 +39,14 @@ public class ThreadAddContract extends Thread {
     @Override
     public void run() {
         String baseUrl = "https://api.cryptodo.app/api/";
-        AddUserOut userOut = new AddUserOut();
+        UserOut userOut = new UserOut();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         UserService service = retrofit.create(UserService.class);
-        Call<AddUserOut> call = service.loginMobile(new AddUser(id));
+        Call<UserOut> call = service.loginMobile(new User(id));
         try {
             userOut = call.execute().body();
         } catch (IOException e) {
@@ -65,26 +63,33 @@ public class ThreadAddContract extends Thread {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-            Call<ContractAddOut> callContract;
+            Call<ContractOut> callContract;
             ContractService contractService = retrofit.create(ContractService.class);
             if (contract.isEmpty()) {
                 callContract = contractService.addNft(contractNFT);
+                contractType = "erc721";
             } else {
                 callContract = contractService.add(contract);
+                contractType = "erc20";
             }
             try {
-                ContractAddOut contractAddOut = callContract.execute().body();
+                ContractOut contractOut = callContract.execute().body();
+                ContractStatusOut status = new ContractStatusOut();
 
                 Call<ContractStatusOut> callStatus;
                 for (int i = 0; i < 7; i++) {
                     try {
-                        callStatus = contractService.status(new ContractStatus(contractAddOut.checkCode));
-                        ContractStatusOut status = callStatus.execute().body();
+                        callStatus = contractService.status(new ContractStatus(contractOut.checkCode));
+                        status = callStatus.execute().body();
                     } catch (Exception e) {}
                     Thread.sleep(90000);
                 }
 
-                // TODO: добавить тут запрос в базу на добавление
+                if (!status.isEmpty()) {
+                    mDBConnector.insertStatus("ok", status.url, contractType);
+                } else {
+                    mDBConnector.insertStatus("error", "", contractType);
+                }
 
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();

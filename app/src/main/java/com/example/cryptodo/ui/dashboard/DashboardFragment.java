@@ -4,29 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cryptodo.R;
-import com.example.cryptodo.api.UserService;
-import com.example.cryptodo.api.in_models.AddUser;
-import com.example.cryptodo.api.out_models.AddUserOut;
 import com.example.cryptodo.db.DB;
-
-import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener {
     DB mDBConnector;

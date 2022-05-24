@@ -1,29 +1,15 @@
 package com.example.cryptodo.api;
 
 
-import android.util.Log;
-
-import java.io.IOException;
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import com.example.cryptodo.api.in_models.AddUser;
-import com.example.cryptodo.api.out_models.AddUserOut;
+import com.example.cryptodo.api.in_models.User;
+import com.example.cryptodo.api.out_models.UserOut;
 import com.example.cryptodo.db.DB;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class ApiRequests {
@@ -35,20 +21,20 @@ public class ApiRequests {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         UserService service = retrofit.create(UserService.class);
-        Call<AddUserOut> call = service.addMobile(new AddUser(id));
+        Call<UserOut> call = service.addMobile(new User(id));
 
-        call.enqueue(new Callback<AddUserOut>() {
+        call.enqueue(new Callback<UserOut>() {
             @Override
-            public void onResponse(Call<AddUserOut> call, Response<AddUserOut> response) {
+            public void onResponse(Call<UserOut> call, Response<UserOut> response) {
                 try {
-                    AddUserOut userOut = response.body();
+                    UserOut userOut = response.body();
                     mDBConnector.insertUser(id);
                 } catch (Exception e) {
 
                 }
             }
             @Override
-            public void onFailure(Call<AddUserOut> call, Throwable t) {
+            public void onFailure(Call<UserOut> call, Throwable t) {
             }
         });
     }
@@ -59,19 +45,19 @@ public class ApiRequests {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         UserService service = retrofit.create(UserService.class);
-        Call<AddUserOut> call = service.loginMobile(new AddUser(id));
+        Call<UserOut> call = service.loginMobile(new User(id));
 
-        call.enqueue(new Callback<AddUserOut>() {
+        call.enqueue(new Callback<UserOut>() {
             @Override
-            public void onResponse(Call<AddUserOut> call, Response<AddUserOut> response) {
+            public void onResponse(Call<UserOut> call, Response<UserOut> response) {
                 try {
-                    AddUserOut userOut = response.body();
+                    UserOut userOut = response.body();
                 } catch (Exception e) {
 
                 }
             }
             @Override
-            public void onFailure(Call<AddUserOut> call, Throwable t) {
+            public void onFailure(Call<UserOut> call, Throwable t) {
             }
         });
     }

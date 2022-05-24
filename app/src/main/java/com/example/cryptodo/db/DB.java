@@ -5,12 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
 
-import com.example.cryptodo.api.in_models.AddNft;
-import com.example.cryptodo.api.in_models.AddSimple;
-import com.example.cryptodo.api.in_models.AddUser;
+import com.example.cryptodo.api.in_models.NFTContract;
+import com.example.cryptodo.api.in_models.SimpleContract;
+import com.example.cryptodo.api.in_models.User;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -52,6 +52,7 @@ public class DB {
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_CHECK_CODE = "check_code";
     private static final String COLUMN_STATUS = "status";
+    private static final String COLUMN_CONTRACT_URL = "contract_url";
 
     // Названия столбцов для нфт контрактов
     private static final String COLUMN_PER_TX = "per_tx";
@@ -79,25 +80,7 @@ public class DB {
         mDataBase = mOpenHelper.getWritableDatabase();
     }
 
-    public void updateValue(String tableName, String column, int value, int id) {
-        ContentValues cv = new ContentValues();
-        cv.put(column, value);
-        mDataBase.update(tableName, cv, "id=?", new String[]{Integer.toString(id)} );
-    }
-
-    public void updateValue(String tableName, String column, float value, int id) {
-        ContentValues cv = new ContentValues();
-        cv.put(column, value);
-        mDataBase.update(tableName, cv, "id=?", new String[]{Integer.toString(id)} );
-    }
-
-    public void updateValue(String tableName, String column, String value, int id) {
-        ContentValues cv = new ContentValues();
-        cv.put(column, value);
-        mDataBase.update(tableName, cv, "id=?", new String[]{Integer.toString(id)} );
-    }
-
-    public AddNft getNftContract() {
+    public NFTContract getNftContract() {
         Cursor mCursor = mDataBase.query(TABLE_NAME_2, null, COLUMN_ID + " = ?", new String[]{String.valueOf(getMaxIdNFT())}, null, null, null);
         mCursor.moveToFirst();
         int perTx = mCursor.getInt(1);
@@ -122,12 +105,48 @@ public class DB {
 
         String title = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-        return new AddNft(owner, totalSupply, name, title, symbol, perTx, perWallet, startPrice,
+        return new NFTContract(owner, totalSupply, name, title, symbol, perTx, perWallet, startPrice,
                 timeForGrown, founder, uri, incrementMaxAmount, presale, blockchain);
 
     }
 
-    public AddSimple getSimpleContract() {
+    public ArrayList<ContractProfile> getAllNftContractsForProfile() {
+        Cursor mCursor = mDataBase.query(TABLE_NAME_2, null, null, null, null, null, null);
+        mCursor.moveToFirst();
+        ArrayList<ContractProfile> arr = new ArrayList<ContractProfile>();
+        if (!mCursor.isAfterLast()) {
+            do {
+                String name = mCursor.getString(13);
+                String url = mCursor.getString(15);
+                String status = mCursor.getString(15);
+
+                String title = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+                arr.add(new ContractProfile(title, "erc721", url, status));
+            } while (mCursor.moveToNext());
+        }
+        return arr;
+    }
+
+    public ArrayList<ContractProfile> getAllSimpleContractsForProfile() {
+        Cursor mCursor = mDataBase.query(TABLE_NAME, null, null, null, null, null, null);
+        mCursor.moveToFirst();
+        ArrayList<ContractProfile> arr = new ArrayList<ContractProfile>();
+        if (!mCursor.isAfterLast()) {
+            do {
+                String name = mCursor.getString(9);
+                String url = mCursor.getString(12);
+                String status = mCursor.getString(13);
+
+                String title = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+                arr.add(new ContractProfile(title, "erc20", url, status));
+            } while (mCursor.moveToNext());
+        }
+        return arr;
+    }
+
+    public SimpleContract getSimpleContract() {
         Cursor mCursor = mDataBase.query(TABLE_NAME, null, COLUMN_ID + " = ?", new String[]{String.valueOf(getMaxIdSimple())}, null, null, null);
         mCursor.moveToFirst();
         boolean burn = mCursor.getInt(1) == 1;
@@ -142,7 +161,7 @@ public class DB {
 
         String title = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-        return new AddSimple(owner, totalSupply, decimals, name, title, symbol, blockchain,
+        return new SimpleContract(owner, totalSupply, decimals, name, title, symbol, blockchain,
                 burn, mint, safemoon);
     }
 
@@ -209,7 +228,7 @@ public class DB {
         mDataBase.insert(TABLE_NAME_4, null, cv);
     }
 
-    public AddUser getUser() {
+    public User getUser() {
         Cursor mCursor = mDataBase.query(TABLE_NAME_4, null, null, null, null, null, null);
 
         mCursor.moveToFirst();
@@ -219,8 +238,22 @@ public class DB {
         } catch (Exception e) {
             id = "";
         }
-        return new AddUser(id);
+        return new User(id);
     }
+
+    public void insertStatus(String status, String url, String type) {
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_CONTRACT_URL, url);
+        cv.put(COLUMN_STATUS, status);
+
+        String table;
+        if (type == "erc20") {
+            table = TABLE_NAME;
+        } else { table = TABLE_NAME_2;}
+
+        mDataBase.update(table, cv, COLUMN_ID + " = ?", new String[] { String.valueOf(getMaxIdNFT())});
+    }
+
 
     public int updateNft(int per_tx, int per_wallet, float start_price, String time_for_grown, String url, boolean fixed_token, boolean presale) {
         ContentValues cv = new ContentValues();
@@ -269,7 +302,6 @@ public class DB {
         mDataBase.update(TABLE_NAME_3,  cv, null, null);
     }
 
-
     public class OpenHelper extends SQLiteOpenHelper {
         OpenHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -296,6 +328,7 @@ public class DB {
                     COLUMN_NAME + "TEXT," +
                     COLUMN_DECIMALS + "INTEGER," +
                     COLUMN_CHECK_CODE + "TEXT," +
+                    COLUMN_CONTRACT_URL + "INTEGER," +
                     COLUMN_STATUS + "TEXT DEFAULT \"not completed\");";
 
             db.execSQL(query);
@@ -316,6 +349,7 @@ public class DB {
                     COLUMN_SYMBOL + "TEXT," +
                     COLUMN_NAME + "TEXT," +
                     COLUMN_TOTAL_SUPPLY + "INTEGER," +
+                    COLUMN_CONTRACT_URL + "INTEGER," +
                     COLUMN_STATUS + "TEXT DEFAULT \"not completed\");";
             db.execSQL(query);
 

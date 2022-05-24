@@ -4,25 +4,37 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ListView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cryptodo.R;
-import com.example.cryptodo.databinding.FragmentHomeBinding;
+import com.example.cryptodo.db.ContractProfile;
+import com.example.cryptodo.db.DB;
+import com.example.cryptodo.ui.dashboard.ContractListAdapter;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
+    private DB mDBConnector;
 
     public HomeFragment() {
-
+        mDBConnector = new DB(getActivity());
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ListView listView = getActivity().findViewById(R.id.list_view_profile);
+
+        ArrayList<ContractProfile> contracts1 = mDBConnector.getAllSimpleContractsForProfile();
+        ArrayList<ContractProfile> contracts2 = mDBConnector.getAllNftContractsForProfile();
+
+        contracts1.addAll(contracts2);
+
+        ContractListAdapter adapter = new ContractListAdapter(getActivity(), contracts1);
+        listView.setAdapter(adapter);
     }
 
     @Override

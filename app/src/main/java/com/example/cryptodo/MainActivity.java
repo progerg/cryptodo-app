@@ -3,12 +3,8 @@ package com.example.cryptodo;
 import android.os.Bundle;
 
 import com.example.cryptodo.api.ApiRequests;
-import com.example.cryptodo.api.UserService;
-import com.example.cryptodo.api.in_models.AddUser;
-import com.example.cryptodo.api.out_models.AddUserOut;
+import com.example.cryptodo.api.in_models.User;
 import com.example.cryptodo.db.DB;
-import com.example.cryptodo.ui.dashboard.ContractTypeFragment;
-import com.example.cryptodo.ui.dashboard.DashboardAreaFragment;
 import com.example.cryptodo.ui.dashboard.DashboardFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,14 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.cryptodo.databinding.ActivityMainBinding;
 
-import java.io.IOException;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -59,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void checkUser() {
-        AddUser user = mDBConnector.getUser();
+        User user = mDBConnector.getUser();
         if (user.userId.isEmpty()) {
             ApiRequests apiReq = new ApiRequests();
             apiReq.registerUser(mDBConnector.generateId(), mDBConnector);

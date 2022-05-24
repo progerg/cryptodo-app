@@ -13,15 +13,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.cryptodo.R;
-import com.example.cryptodo.api.ContractService;
 import com.example.cryptodo.api.ThreadAddContract;
-import com.example.cryptodo.api.in_models.AddNft;
-import com.example.cryptodo.api.in_models.AddUser;
-import com.example.cryptodo.api.out_models.ContractAddOut;
+import com.example.cryptodo.api.in_models.NFTContract;
+import com.example.cryptodo.api.in_models.User;
 import com.example.cryptodo.db.DB;
-
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NftParams2 extends Fragment {
     private DB mDBConnector;
@@ -67,13 +62,13 @@ public class NftParams2 extends Fragment {
                 Switch fixedSwitch = (Switch) getView().findViewById(R.id.fixed_switch);
                 boolean fixedToken = fixedSwitch.isChecked();
 
-                Switch presaleSwitch = (Switch) getView().findViewById(R.id.fixed_switch);
+                Switch presaleSwitch = (Switch) getView().findViewById(R.id.presale_switch);
                 boolean presale = presaleSwitch.isChecked();
 
                 mDBConnector.updateNft(Integer.parseInt(perTx), Integer.parseInt(perWallet), Float.parseFloat(startPrice), timeForGrown, url, fixedToken, presale);
 
-                AddNft contract = mDBConnector.getNftContract();
-                AddUser user = mDBConnector.getUser();
+                NFTContract contract = mDBConnector.getNftContract();
+                User user = mDBConnector.getUser();
 
                 ThreadAddContract threadAddContract = new ThreadAddContract(user.userId, contract, mDBConnector);
                 getChildFragmentManager().beginTransaction().replace(R.id.fragment_nft_params2, new SuccessfulFragment())
