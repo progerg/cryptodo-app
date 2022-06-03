@@ -336,7 +336,7 @@ public class DB {
                     COLUMN_NAME + " TEXT," +
                     COLUMN_DECIMALS + " INTEGER," +
                     COLUMN_CHECK_CODE + " TEXT," +
-                    COLUMN_CONTRACT_URL + " INTEGER," +
+                    COLUMN_CONTRACT_URL + " TEXT," +
                     COLUMN_STATUS + " TEXT DEFAULT \"not completed\");";
 
             db.execSQL(query);
@@ -357,7 +357,7 @@ public class DB {
                     COLUMN_SYMBOL + " TEXT," +
                     COLUMN_NAME + " TEXT," +
                     COLUMN_TOTAL_SUPPLY + " INTEGER," +
-                    COLUMN_CONTRACT_URL + " INTEGER," +
+                    COLUMN_CONTRACT_URL + " TEXT," +
                     COLUMN_STATUS + " TEXT DEFAULT \"not completed\");";
             db.execSQL(query);
 
