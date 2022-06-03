@@ -2,7 +2,7 @@
     <string name="app_name">CryptoDo</string>
     <string name="title_home">Profile</string>
     <string name="title_dashboard">Create Contract</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_notifications">Info</string>
     <string name="english_letters">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="letters_with_number">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890</string>
     <string name="upper_letters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>

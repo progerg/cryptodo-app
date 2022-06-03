@@ -15,6 +15,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:layout_height="45dp"
+            android:layout_width="45dp"
+            android:id="@+id/blockchain_profile_icon"></ImageView>
+
         <TextView
             android:id="@+id/title_profile"
             android:layout_width="wrap_content"
@@ -22,8 +27,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:text="title"
-            android:textSize="15dp"
-            android:textColor="@color/black"></TextView>
+            android:textSize="15dp"></TextView>
 
         <TextView
             android:id="@+id/type_profile"
@@ -44,7 +48,7 @@
         <Button
             android:id="@+id/profile_button"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="45dp"
             android:text="OPEN" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

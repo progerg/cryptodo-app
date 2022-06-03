@@ -1,12 +1,16 @@
 package com.example.cryptodo.ui.dashboard;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -32,8 +36,8 @@ public class NftParams2 extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         Button button = (Button) getView().findViewById(R.id.create_button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -70,8 +74,13 @@ public class NftParams2 extends Fragment {
                 NFTContract contract = mDBConnector.getNftContract();
                 User user = mDBConnector.getUser();
 
-                ThreadAddContract threadAddContract = new ThreadAddContract(user.userId, contract, mDBConnector);
-                threadAddContract.run();
+                ThreadAddContract threadAddContract = new ThreadAddContract(user.user_id, contract, mDBConnector);
+                threadAddContract.start();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+
                 getChildFragmentManager().beginTransaction().replace(R.id.fragment_nft_params2, new SuccessfulFragment())
                         .setReorderingAllowed(true).commit();
                 button.setEnabled(false);

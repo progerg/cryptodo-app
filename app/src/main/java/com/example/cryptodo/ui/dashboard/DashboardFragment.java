@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.cryptodo.R;
@@ -35,8 +36,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         bscButton = (ImageButton) getView().findViewById(R.id.bscButton);
         bscButton.setOnClickListener(this);
 
@@ -48,8 +49,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         tronButton = (ImageButton) getView().findViewById(R.id.tronButton);
         tronButton.setOnClickListener(this);
-
-
     }
 
     @Override

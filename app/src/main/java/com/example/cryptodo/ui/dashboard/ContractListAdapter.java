@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class ContractListAdapter extends ArrayAdapter<ContractProfile> {
         TextView title = rowView.findViewById(R.id.title_profile);
         TextView type = rowView.findViewById(R.id.type_profile);
         TextView status = rowView.findViewById(R.id.status_profile);
+        ImageView image = rowView.findViewById(R.id.blockchain_profile_icon);
 
 
         Button button = rowView.findViewById(R.id.profile_button);
@@ -47,6 +49,22 @@ public class ContractListAdapter extends ArrayAdapter<ContractProfile> {
         title.setText(contract.get(position).title);
         type.setText(contract.get(position).type);
         status.setText(contract.get(position).status);
+
+        switch (contract.get(position).blockchain) {
+            case "bsc":
+                image.setImageResource(R.drawable.ic_bsc_profile);
+                break;
+            case "eth":
+                image.setImageResource(R.drawable.ic_ether_profile);
+                break;
+            case "tron":
+                image.setImageResource(R.drawable.ic_tron_profile);
+                break;
+            case "pol":
+                image.setImageResource(R.drawable.ic_polygon_profile);
+                break;
+        }
+
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override

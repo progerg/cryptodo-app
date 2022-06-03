@@ -118,11 +118,12 @@ public class DB {
             do {
                 String name = mCursor.getString(13);
                 String url = mCursor.getString(15);
-                String status = mCursor.getString(15);
+                String status = mCursor.getString(16);
+                String blockchain = mCursor.getString(5);
 
                 String title = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-                arr.add(new ContractProfile(title, "erc721", url, status));
+                arr.add(new ContractProfile(title, "erc721", url, status, blockchain));
             } while (mCursor.moveToNext());
         }
         return arr;
@@ -137,10 +138,11 @@ public class DB {
                 String name = mCursor.getString(9);
                 String url = mCursor.getString(12);
                 String status = mCursor.getString(13);
+                String blockchain = mCursor.getString(5);
 
                 String title = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-                arr.add(new ContractProfile(title, "erc20", url, status));
+                arr.add(new ContractProfile(title, "erc20", url, status, blockchain));
             } while (mCursor.moveToNext());
         }
         return arr;
@@ -243,6 +245,7 @@ public class DB {
     }
 
     public void insertStatus(String status, String url, String type) {
+        int lastId = 0;
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_CONTRACT_URL, url);
         cv.put(COLUMN_STATUS, status);
@@ -250,9 +253,13 @@ public class DB {
         String table;
         if (type == "erc20") {
             table = TABLE_NAME;
-        } else { table = TABLE_NAME_2;}
+            lastId = getMaxIdSimple();
+        } else {
+            table = TABLE_NAME_2;
+            lastId = getMaxIdNFT();
+        }
 
-        mDataBase.update(table, cv, COLUMN_ID + " = ?", new String[] { String.valueOf(getMaxIdNFT())});
+        mDataBase.update(table, cv, COLUMN_ID + " = ?", new String[] { String.valueOf(lastId)});
     }
 
 

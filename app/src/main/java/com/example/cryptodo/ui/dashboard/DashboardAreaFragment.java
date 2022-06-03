@@ -2,6 +2,7 @@ package com.example.cryptodo.ui.dashboard;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -34,8 +35,8 @@ public class DashboardAreaFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         getChildFragmentManager().beginTransaction().replace(R.id.dashboard_area, dashboard_fragment)
                 .setReorderingAllowed(true).commit();
     }

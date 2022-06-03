@@ -1,9 +1,9 @@
 package com.example.cryptodo.api.in_models;
 
 public class ContractStatus {
-    public String checkCode;
+    public String check_code;
 
     public ContractStatus(String checkCode) {
-        this.checkCode = checkCode;
+        this.check_code = checkCode;
     }
 }

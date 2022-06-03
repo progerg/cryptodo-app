@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.info.InfoFragment"
+    android:background="@color/blue_700">>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="INFORMATION"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="24sp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="100dp">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="116dp"
+            android:text="CryptoDo is a an app where you can create your own ERC-20 and ERC-721 smart contracts"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:text="Subscribe alse to our Telegram channel"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <ImageButton
+            android:id="@+id/buttonTelegram"
+            android:layout_width="267dp"
+            android:layout_height="267dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_telegram_logo"
+            android:background="?android:selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

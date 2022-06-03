@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -27,16 +28,16 @@ public class ContractTypeFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         erc721 = (ImageButton) getView().findViewById(R.id.erc721);
         erc721.setOnClickListener(this);
 
         erc20 = (ImageButton) getView().findViewById(R.id.erc20);
         erc20.setOnClickListener(this);
-
     }
 
+    @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_ctype, container, false);

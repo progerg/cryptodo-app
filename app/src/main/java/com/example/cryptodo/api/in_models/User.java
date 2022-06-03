@@ -1,9 +1,9 @@
 package com.example.cryptodo.api.in_models;
 
 public class User {
-    public String userId;
+    public String user_id;
 
     public User(String id) {
-        this.userId = id;
+        this.user_id = id;
     }
 }

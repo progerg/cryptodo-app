@@ -12,12 +12,12 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ContractService {
-    @POST("/add-nft")
+    @POST("contract/add-nft")
     Call<ContractOut> addNft(@Body NFTContract nft);
 
-    @POST("/add")
+    @POST("contract/add")
     Call<ContractOut> add(@Body SimpleContract simple);
 
-    @POST("/status")
+    @POST("contract/status")
     Call<ContractStatusOut> status(@Body ContractStatus status);
 }

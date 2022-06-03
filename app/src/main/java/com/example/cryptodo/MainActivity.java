@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkUser() {
         User user = mDBConnector.getUser();
-        if (user.userId.isEmpty()) {
+        if (user.user_id.isEmpty()) {
             ApiRequests apiReq = new ApiRequests();
             apiReq.registerUser(mDBConnector.generateId(), mDBConnector);
         }
