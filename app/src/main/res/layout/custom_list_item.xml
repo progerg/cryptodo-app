@@ -27,6 +27,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:text="title"
+            android:textColor="@color/white"
             android:textSize="15dp"></TextView>
 
         <TextView
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:text="erc20"
+            android:textColor="@color/white"
             android:textSize="15dp"></TextView>
 
         <TextView
@@ -43,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:text="ok"
+            android:textColor="@color/white"
             android:textSize="15dp"></TextView>
 
         <Button
